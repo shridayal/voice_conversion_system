@@ -1,0 +1,26 @@
+
+# Sample configuration for testing
+models:
+  speaker_encoder_model: "resemblyzer"
+  content_encoder_model: "facebook/wav2vec2-base-960h"
+  voice_converter_model: "autovc"
+  vocoder_model: "hifigan"
+  sample_rate: 16000
+  hop_length: 256
+  win_length: 1024
+  n_mels: 80
+
+processing:
+  chunk_duration: 10.0
+  overlap_duration: 1.0
+  max_audio_length: 60
+  min_target_duration: 3.0
+  noise_threshold: 10.0
+
+system:
+  cache_dir: "cache"
+  temp_dir: "temp"
+  voice_library_dir: "models/voice_library"
+  log_level: "INFO"
+  log_file: "logs/voice_conversion.log"
+  max_workers: 4

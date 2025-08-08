@@ -1,0 +1,61 @@
+# Voice Conversion System - Model Configuration
+
+# Speaker Encoder Settings
+speaker_encoder:
+  model_name: "resemblyzer"
+  embedding_dim: 256
+  sampling_rate: 16000
+  utterance_min_duration: 1.6  # seconds
+  utterance_max_duration: 10.0  # seconds
+  overlap_rate: 0.5
+
+# Content Encoder Settings  
+content_encoder:
+  model_name: "facebook/wav2vec2-base-960h"
+  hidden_size: 768
+  feature_extraction_layers: [6, 7, 8, 9, 10, 11]  # Which transformer layers to use
+  sampling_rate: 16000
+  normalize_features: true
+
+# Voice Converter Model Settings
+voice_converter:
+  model_type: "autovc"  # Options: autovc, vqvae, cyclegan
+  model_path: "models/voice_converter"  # Path to trained model weights
+  hidden_dim: 256
+  encoder_layers: 3
+  decoder_layers: 3
+  bottleneck_dim: 16
+  
+# Vocoder Settings
+vocoder:
+  model_name: "hifigan"  # Options: hifigan, wavenet, melgan
+  model_path: "models/vocoder"
+  sampling_rate: 22050
+  hop_length: 256
+  win_length: 1024
+  n_mels: 80
+  n_fft: 1024
+  
+# Audio Processing Settings
+audio_processing:
+  target_sample_rate: 16000
+  target_channels: 1  # mono
+  normalization: "peak"  # Options: peak, rms, none
+  trim_silence: true
+  silence_threshold: -40  # dB
+  min_silence_duration: 0.1  # seconds
+  
+# Training Settings (for future model training)
+training:
+  batch_size: 16
+  learning_rate: 0.0001
+  num_epochs: 100
+  checkpoint_interval: 10
+  validation_split: 0.1
+  
+# Quality Settings
+quality:
+  output_sample_rate: 22050
+  output_bit_depth: 16
+  output_format: "wav"  # Options: wav, mp3, flac
+  target_snr: 20  # dB minimum signal-to-noise ratio
